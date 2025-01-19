@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"mime"
 	"net/http"
 	"os"
 	"path"
@@ -181,6 +182,12 @@ func main() {
 
 	r.Get("/uploads/{filename}", func(w http.ResponseWriter, r *http.Request) {
 		filename := chi.URLParam(r, "filename")
+
+		mimeType := mime.TypeByExtension(path.Ext(filename))
+		if mimeType != "" {
+			w.Header().Set("Content-Type", mimeType)
+		}
+
 		http.ServeFile(w, r, path.Join(uploadFolder, filename))
 	})
 
