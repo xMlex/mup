@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  mup:
+    image: xmlex/mup@sha256:e0c908318430bd80c1ef6fe24b51f5d09f5cd917ee96ddc543526aa743ff9226
+    ports:
+      - 80:5000
+    volumes:
+      - uploads:/Uploads
+
+volumes:
+  uploads:
+    external: true
+    name: uploads
