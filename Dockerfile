@@ -15,6 +15,8 @@ FROM alpine:latest
 
 WORKDIR /
 
+RUN apk add --no-cache shared-mime-info
+
 COPY --from=builder /app/bin/mup ./bin/mup
 
 EXPOSE 5000
